@@ -7,234 +7,127 @@
 
 <style>
 :root{
-  --primario:#38bdf8;
-  --secundario:#0ea5e9;
-  --fondo:#020617;
-  --panel:#0f172a;
-  --borde:#1e293b;
-  --texto:#e5e7eb;
-  --muted:#94a3b8;
+--primario:#38bdf8;--secundario:#0ea5e9;--fondo:#020617;
+--panel:#0f172a;--borde:#1e293b;--texto:#e5e7eb;
+--muted:#94a3b8;--ok:#22c55e;--error:#ef4444;
 }
-
 *{box-sizing:border-box;scroll-behavior:smooth}
-
 body{
-  margin:0;
-  font-family:system-ui,Segoe UI,sans-serif;
-  background:radial-gradient(circle at top,#0f172a,#020617 70%);
-  color:var(--texto);
-  overflow-x:hidden;
+margin:0;font-family:system-ui;
+background:radial-gradient(circle at top,#0f172a,#020617 70%);
+color:var(--texto)
 }
-
-/* NAV */
 nav{
-  position:fixed;top:0;width:100%;z-index:1000;
-  background:rgba(2,6,23,.75);
-  backdrop-filter:blur(14px);
-  border-bottom:1px solid var(--borde);
+position:fixed;top:0;width:100%;z-index:1000;
+background:rgba(2,6,23,.75);
+backdrop-filter:blur(14px);
+border-bottom:1px solid var(--borde)
 }
 nav ul{
-  margin:0;padding:14px;
-  list-style:none;display:flex;justify-content:center;gap:36px
+margin:0;padding:14px;list-style:none;
+display:flex;justify-content:center;gap:36px
 }
-nav a{
-  color:var(--texto);text-decoration:none;font-weight:600;position:relative
-}
-nav a::after{
-  content:"";position:absolute;left:0;bottom:-8px;width:0;height:2px;
-  background:linear-gradient(90deg,var(--primario),var(--secundario));
-  transition:.3s
-}
-nav a:hover::after{width:100%}
-
-/* HERO */
+nav a{color:var(--texto);text-decoration:none;font-weight:600}
 header{
-  height:100vh;display:flex;align-items:center;justify-content:center;
-  text-align:center;padding:40px;position:relative
+height:100vh;display:flex;align-items:center;
+justify-content:center;text-align:center
 }
-header::before{
-  content:"";position:absolute;inset:0;
-  background:linear-gradient(135deg,#0ea5e9,#2563eb);
-  z-index:-2
-}
-header::after{
-  content:"";position:absolute;inset:0;
-  background:url("https://images.unsplash.com/photo-1518770660439-4636190af475") center/cover;
-  opacity:.15;z-index:-1
-}
-header h1{
-  font-size:4rem;margin-bottom:20px;
-  text-shadow:0 20px 50px rgba(0,0,0,.6)
-}
-header p{
-  font-size:1.35rem;max-width:900px;color:#e0f2fe
-}
-
-section{padding:110px 20px;max-width:1250px;margin:auto}
+section{padding:110px 20px;max-width:1200px;margin:auto}
 h2{
-  text-align:center;font-size:2.6rem;margin-bottom:50px;
-  background:linear-gradient(90deg,var(--primario),var(--secundario));
-  -webkit-background-clip:text;color:transparent
+text-align:center;font-size:2.6rem;margin-bottom:40px;
+background:linear-gradient(90deg,var(--primario),var(--secundario));
+-webkit-background-clip:text;color:transparent
 }
-
-/* CARDS */
-.grid{
-  display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:35px
-}
-.card{
-  background:linear-gradient(160deg,#020617,#0f172a);
-  border:1px solid var(--borde);border-radius:26px;padding:30px;
-  box-shadow:0 40px 80px rgba(0,0,0,.6);
-  transform:translateY(50px) scale(.95);opacity:0;
-  transition:.8s cubic-bezier(.4,0,.2,1)
-}
-.card.show{transform:translateY(0) scale(1);opacity:1}
-.card img{
-  width:100%;border-radius:18px;margin-bottom:18px;
-  transition:.5s
-}
-.card:hover img{transform:scale(1.08)}
-.card p{color:var(--muted);line-height:1.7}
-
-/* INFO */
-.info{
-  max-width:800px;margin:auto;text-align:center;
-  background:linear-gradient(160deg,#020617,#0f172a);
-  border:1px solid var(--borde);border-radius:30px;padding:50px;
-  box-shadow:0 40px 90px rgba(56,189,248,.25);
-  transform:scale(.9);opacity:0;transition:.8s
-}
-.info.show{transform:scale(1);opacity:1}
-
-/* FORM */
 form{
-  max-width:750px;margin:auto;
-  background:linear-gradient(160deg,#020617,#0b1220);
-  border:1px solid var(--borde);border-radius:32px;
-  padding:45px;box-shadow:0 45px 100px rgba(0,0,0,.85)
+max-width:700px;margin:auto;
+background:#020617;border-radius:30px;
+padding:40px;border:1px solid var(--borde)
 }
-label{display:block;margin-top:22px;color:var(--primario);font-weight:600}
+label{display:block;margin-top:20px;color:var(--primario)}
 input,select{
-  width:100%;margin-top:10px;padding:15px;
-  border-radius:14px;border:1px solid var(--borde);
-  background:#020617;color:var(--texto)
+width:100%;margin-top:8px;padding:14px;
+border-radius:14px;border:1px solid var(--borde);
+background:#020617;color:white
 }
 button{
-  margin-top:35px;width:100%;padding:18px;
-  font-size:1.15rem;font-weight:700;border-radius:18px;
-  border:none;cursor:pointer;color:white;
-  background:linear-gradient(135deg,#0284c7,#38bdf8);
-  box-shadow:0 25px 50px rgba(56,189,248,.6);
-  transition:.35s
-}
-button:hover{transform:translateY(-6px) scale(1.04)}
-
-footer{
-  padding:35px;text-align:center;color:var(--muted);
-  border-top:1px solid var(--borde)
+margin-top:30px;width:100%;padding:16px;
+font-size:1.1rem;border:none;border-radius:18px;
+background:linear-gradient(135deg,#0284c7,#38bdf8);
+color:white;cursor:pointer
 }
 </style>
 </head>
 
 <body>
 
-<nav>
-<ul>
-  <li><a href="#inicio">Inicio</a></li>
-  <li><a href="#club">El Club</a></li>
-  <li><a href="#funciona">Funcionamiento</a></li>
-  <li><a href="#registro">Registro</a></li>
-</ul>
-</nav>
-
-<header id="inicio">
-  <div>
-    <h1>Club de Prototipos</h1>
-    <p>Del concepto a la realidad · Electrónica · Lógica · Microcontroladores<br>Exclusivo CETIS 107</p>
-  </div>
+<header>
+<div>
+<h1>Club de Prototipos</h1>
+<p>Exclusivo CETIS 107 · Sábados</p>
+</div>
 </header>
 
-<section id="club">
-<h2>¿De qué trata el club?</h2>
-<div class="grid">
-  <div class="card"><img src="https://images.unsplash.com/photo-1581092919531-4c2b9c3f2f6a"><p>Convertir ideas en prototipos funcionales.</p></div>
-  <div class="card"><img src="https://images.unsplash.com/photo-1518770660439-4636190af475"><p>Uso de electrónica y microcontroladores.</p></div>
-  <div class="card"><img src="https://images.unsplash.com/photo-1581092334651-ddf26d9b1f68"><p>Trabajo colaborativo y pensamiento lógico.</p></div>
-</div>
-</section>
-
-<section id="funciona">
-<h2>¿Cómo funciona?</h2>
-<div class="info">
-  <p><strong>Solo alumnos del CETIS 107</strong></p>
-  <p>Sesiones los <strong>sábados</strong></p>
-  <p><em>Horarios pendientes</em></p>
-</div>
-</section>
-
 <section id="registro">
-<h2>Registro al Club</h2>
+<h2>Registro</h2>
 
 <form id="registroForm">
-  <label>Nombres</label><input name="nombres" required>
-  <label>Apellido paterno</label><input name="apellidoPaterno" required>
-  <label>Apellido materno</label><input name="apellidoMaterno" required>
-  <label>Grupo</label><input name="grupo">
-  <label>Especialidad</label>
-  <select name="especialidad">
-    <option>Electronica</option>
-    <option>Programacion</option>
-    <option>Diseno</option>
-    <option>Ofimatica</option>
-    <option>Construccion</option>
-    <option>Contabilidad</option>
-    <option>Aun no tengo</option>
-  </select>
-  <label>Correo electronico</label>
-  <input name="correo" type="email" placeholder="@cetis107.edu.mx" required>
-  <label>Telefono</label><input name="telefono" required>
-  <label>Edad</label><input name="edad" type="number" min="10" max="99" required>
-  <button>Enviar registro</button>
+
+<label>Nombres</label>
+<input name="nombres" required>
+
+<label>Apellido paterno</label>
+<input name="apellidoPaterno" required>
+
+<label>Apellido materno</label>
+<input name="apellidoMaterno" required>
+
+<label>Grupo</label>
+<input name="grupo">
+
+<label>Especialidad</label>
+<select name="especialidad">
+<option>Electrónica</option>
+<option>Programación</option>
+<option>Diseño</option>
+<option>Ofimática</option>
+<option>Construcción</option>
+<option>Contabilidad</option>
+<option>Aún no tengo</option>
+</select>
+
+<label>Correo</label>
+<input type="email" name="correo" placeholder="@cetis107.edu.mx" required>
+
+<label>Teléfono</label>
+<input type="tel" name="telefono" required>
+
+<label>Edad</label>
+<input type="number" name="edad" min="10" max="99" required>
+
+<button type="submit">Enviar registro</button>
 </form>
 </section>
-
-<footer>Club de Prototipos · CETIS 107</footer>
 
 <script>
 const scriptURL = "https://script.google.com/macros/s/AKfycbwmyQ8SabQAxZIZCw1Qt1p1WkuM03-a9YDkmpkdHqs5GDqb1r1N4jcSMplxJGbCjdwf_A/exec";
 const form = document.getElementById("registroForm");
 
 form.addEventListener("submit", e => {
-  e.preventDefault();
+e.preventDefault();
 
-  if(!form.correo.value.endsWith("@cetis107.edu.mx")){
-    alert("Usa tu correo institucional @cetis107.edu.mx");
-    return;
-  }
+if(!form.correo.value.endsWith("@cetis107.edu.mx")){
+alert("Usa tu correo institucional");
+return;
+}
 
-  const formData = new FormData(form);
-
-  fetch(scriptURL, {
-    method: "POST",
-    body: formData
-  })
-  .then(() => {
-    alert("Registro enviado correctamente 🚀");
-    form.reset();
-  })
-  .catch(err => {
-    alert("Error al enviar ❌");
-    console.error(err);
-  });
+fetch(scriptURL,{
+method:"POST",
+body:new FormData(form)
+})
+.then(()=>{alert("Registro enviado correctamente 🚀");form.reset()})
+.catch(()=>alert("Error al enviar ❌"));
 });
-
-const observer=new IntersectionObserver(e=>{
-  e.forEach(x=>x.target.classList.toggle("show",x.isIntersecting))
-},{threshold:.2});
-
-document.querySelectorAll(".card,.info").forEach(el=>observer.observe(el));
 </script>
 
 </body>
 </html>
-
