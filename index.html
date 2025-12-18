@@ -14,8 +14,6 @@
   --borde:#1e293b;
   --texto:#e5e7eb;
   --muted:#94a3b8;
-  --ok:#22c55e;
-  --error:#ef4444;
 }
 
 *{box-sizing:border-box;scroll-behavior:smooth}
@@ -203,27 +201,30 @@ footer{
 <footer>Club de Prototipos · CETIS 107</footer>
 
 <script>
-const scriptURL="https://script.google.com/macros/s/AKfycbwS_VVy-n7PXq0pkLvnvuiBZjuAyuNa152dp1wyEefrqwBULBwBOacU7-BxHyPFPjaOuQ/exec";
-const form=document.getElementById("registroForm");
+const scriptURL = "https://script.google.com/macros/s/AKfycbwS_VVy-n7PXq0pkLvnvuiBZjuAyuNa152dp1wyEefrqwBULBwBOacU7-BxHyPFPjaOuQ/exec";
+const form = document.getElementById("registroForm");
 
-form.addEventListener("submit",e=>{
+form.addEventListener("submit", e => {
   e.preventDefault();
-  const data=Object.fromEntries(new FormData(form));
 
-  if(!data.correo.endsWith("@cetis107.edu.mx")){
+  if(!form.correo.value.endsWith("@cetis107.edu.mx")){
     alert("Usa tu correo institucional @cetis107.edu.mx");
     return;
   }
 
-  fetch(scriptURL,{
-    method:"POST",
-    body:JSON.stringify(data),
-    headers:{"Content-Type":"application/json"}
-  }).then(()=>{
+  const formData = new FormData(form);
+
+  fetch(scriptURL, {
+    method: "POST",
+    body: formData
+  })
+  .then(() => {
     alert("Registro enviado correctamente 🚀");
     form.reset();
-  }).catch(()=>{
+  })
+  .catch(err => {
     alert("Error al enviar ❌");
+    console.error(err);
   });
 });
 
