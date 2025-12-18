@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Club de Prototipos | CETIS 107</title>
+
+  <style>
+    :root{
+      --primario:#38bdf8;
+      --secundario:#0ea5e9;
+      --fondo:#020617;
+      --panel:#0f172a;
+      --borde:#1e293b;
+      --texto:#e5e7eb;
+      --muted:#94a3b8;
+      --ok:#22c55e;
+      --error:#ef4444;
+    }
+
+    *{box-sizing:border-box;scroll-behavior:smooth}
+
+    body{
+      margin:0;
+      font-family:system-ui,Segoe UI,sans-serif;
+      background:radial-gradient(circle at top,#0f172a,#020617 70%);
+      color:var(--texto);
+      overflow-x:hidden;
+    }
+
+    /* ===== NAV ===== */
+    nav{
+      position:fixed;top:0;width:100%;z-index:1000;
+      background:rgba(2,6,23,.75);
+      backdrop-filter:blur(14px);
+      border-bottom:1px solid var(--borde);
+    }
+
+    nav ul{
+      margin:0;padding:14px;
+      list-style:none;display:flex;justify-content:center;gap:36px
+    }
+
+    nav a{
+      color:var(--texto);text-decoration:none;font-weight:600;position:relative
+    }
+
+    nav a::after{
+      content:"";position:absolute;left:0;bottom:-8px;width:0;height:2px;
+      background:linear-gradient(90deg,var(--primario),var(--secundario));
+      transition:.3s
+    }
+
+    nav a:hover::after{width:100%}
+
+    /* ===== HERO ===== */
+    header{
+      height:100vh;display:flex;align-items:center;justify-content:center;
+      text-align:center;padding:40px;position:relative;overflow:hidden
+    }
+
+    header::before{
+      content:"";position:absolute;inset:0;
+      background:linear-gradient(135deg,#0ea5e9,#2563eb);
+      z-index:-2
+    }
+
+    header::after{
+      content:"";position:absolute;inset:0;
+      background:url("https://images.unsplash.com/photo-1518770660439-4636190af475") center/cover;
+      opacity:.15;z-index:-1
+    }
+
+    header h1{
+      font-size:4rem;margin-bottom:20px;
+      text-shadow:0 20px 50px rgba(0,0,0,.6)
+    }
+
+    header p{
+      font-size:1.35rem;max-width:900px;color:#e0f2fe
+    }
+
+    /* ===== SECTIONS ===== */
+    section{padding:110px 20px;max-width:1250px;margin:auto}
+
+    h2{
+      text-align:center;font-size:2.6rem;margin-bottom:50px;
+      background:linear-gradient(90deg,var(--primario),var(--secundario));
+      -webkit-background-clip:text;color:transparent
+    }
+
+    /* ===== CARDS ===== */
+    .grid{
+      display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:35px
+    }
+
+    .card{
+      background:linear-gradient(160deg,#020617,#0f172a);
+      border:1px solid var(--borde);border-radius:26px;padding:30px;
+      box-shadow:0 40px 80px rgba(0,0,0,.6);
+      transform:translateY(50px) scale(.95);opacity:0;
+      transition:.8s cubic-bezier(.4,0,.2,1)
+    }
+
+    .card.show{transform:translateY(0) scale(1);opacity:1}
+
+    .card img{
+      width:100%;border-radius:18px;margin-bottom:18px;
+      transition:.5s
+    }
+
+    .card:hover img{transform:scale(1.08)}
+
+    .card p{color:var(--muted);line-height:1.7}
+
+    /* ===== INFO BOX ===== */
+    .info{
+      max-width:800px;margin:auto;text-align:center;
+      background:linear-gradient(160deg,#020617,#0f172a);
+      border:1px solid var(--borde);border-radius:30px;padding:50px;
+      box-shadow:0 40px 90px rgba(56,189,248,.25);
+      transform:scale(.9);opacity:0;transition:.8s
+    }
+
+    .info.show{transform:scale(1);opacity:1}
+
+    /* ===== FORM ===== */
+    form{
+      max-width:700px;margin:auto;
+      background:linear-gradient(160deg,#020617,#0b1220);
+      border:1px solid var(--borde);border-radius:32px;
+      padding:45px;box-shadow:0 45px 100px rgba(0,0,0,.8)
+    }
+
+    label{display:block;margin-top:22px;color:var(--primario);font-weight:600}
+
+    input,select{
+      width:100%;margin-top:10px;padding:15px;
+      border-radius:14px;border:1px solid var(--borde);
+      background:#020617;color:var(--texto);
+      transition:.3s
+    }
+
+    input:focus,select:focus{
+      outline:none;border-color:var(--primario);
+      box-shadow:0 0 0 3px rgba(56,189,248,.35)
+    }
+
+    input.ok{border-color:var(--ok)}
+    input.error{border-color:var(--error)}
+
+    button{
+      margin-top:35px;width:100%;padding:18px;
+      font-size:1.15rem;font-weight:700;border-radius:18px;
+      border:none;cursor:pointer;color:white;
+      background:linear-gradient(135deg,#0284c7,#38bdf8);
+      box-shadow:0 25px 50px rgba(56,189,248,.6);
+      transition:.35s
+    }
+
+    button:hover{
+      transform:translateY(-6px) scale(1.04);
+      box-shadow:0 40px 80px rgba(56,189,248,.8)
+    }
+
+    footer{
+      padding:35px;text-align:center;color:var(--muted);
+      border-top:1px solid var(--borde)
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <ul>
+    <li><a href="#inicio">Inicio</a></li>
+    <li><a href="#club">El Club</a></li>
+    <li><a href="#funciona">Funcionamiento</a></li>
+    <li><a href="#registro">Registro</a></li>
+  </ul>
+</nav>
+
+<header id="inicio">
+  <div>
+    <h1>Club de Prototipos</h1>
+    <p>Del concepto a la realidad · Electrónica · Lógica · Microcontroladores<br>Exclusivo CETIS 107</p>
+  </div>
+</header>
+
+<section id="club">
+  <h2>¿De qué trata el club?</h2>
+  <div class="grid">
+    <div class="card"><img src="https://images.unsplash.com/photo-1581092919531-4c2b9c3f2f6a"><p>Aprender a analizar problemas reales y convertirlos en prototipos funcionales.</p></div>
+    <div class="card"><img src="https://images.unsplash.com/photo-1518770660439-4636190af475"><p>Uso de electrónica, sensores, actuadores y microcontroladores como Arduino.</p></div>
+    <div class="card"><img src="https://images.unsplash.com/photo-1581092334651-ddf26d9b1f68"><p>Trabajo colaborativo, pensamiento lógico y desarrollo de habilidades técnicas.</p></div>
+  </div>
+</section>
+
+<section id="funciona">
+  <h2>¿Cómo funciona?</h2>
+  <div class="info">
+    <p><strong>Dirigido exclusivamente a alumnos del CETIS 107</strong></p>
+    <p>Sesiones presenciales los <strong>sábados</strong></p>
+    <p><em>Horarios pendientes de definir (editables)</em></p>
+  </div>
+</section>
+
+<section id="registro">
+  <h2>Registro al Club</h2>
+  <form id="form">
+    <label>Nombres</label><input required>
+    <label>Apellido paterno</label><input required>
+    <label>Apellido materno</label><input required>
+    <label>Grupo</label><input>
+    <label>Especialidad</label>
+    <select><option>Electrónica</option><option>Programación</option><option>Diseño</option><option>Ofimática</option><option>Construcción</option><option>Contabilidad</option><option>Aún no tengo</option></select>
+    <label>Correo electrónico</label><input type="email" placeholder="@cetis107.edu.mx" required>
+    <label>Número de teléfono</label><input type="tel" required>
+    <label>Edad</label><input type="number" min="10" max="99" required>
+    <button>Enviar registro</button>
+  </form>
+</section>
+
+<footer>Club de Prototipos · CETIS 107 · Uso escolar</footer>
+
+<script>
+  const observer=new IntersectionObserver(e=>{
+    e.forEach(x=>x.target.classList.toggle('show',x.isIntersecting))
+  },{threshold:.2})
+
+  document.querySelectorAll('.card,.info').forEach(el=>observer.observe(el))
+
+  document.getElementById('form').addEventListener('input',e=>{
+    if(e.target.tagName==='INPUT'){
+      e.target.classList.toggle('ok',e.target.checkValidity())
+      e.target.classList.toggle('error',!e.target.checkValidity())
+    }
+  })
+</script>
+
+</body>
+</html>
