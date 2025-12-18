@@ -14,8 +14,6 @@
       --borde:#1e293b;
       --texto:#e5e7eb;
       --muted:#94a3b8;
-      --ok:#22c55e;
-      --error:#ef4444;
     }
 
     *{box-sizing:border-box;scroll-behavior:smooth}
@@ -80,7 +78,6 @@
       font-size:1.35rem;max-width:900px;color:#e0f2fe
     }
 
-    /* ===== SECTIONS ===== */
     section{padding:110px 20px;max-width:1250px;margin:auto}
 
     h2{
@@ -89,7 +86,6 @@
       -webkit-background-clip:text;color:transparent
     }
 
-    /* ===== CARDS ===== */
     .grid{
       display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:35px
     }
@@ -113,7 +109,6 @@
 
     .card p{color:var(--muted);line-height:1.7}
 
-    /* ===== INFO BOX ===== */
     .info{
       max-width:800px;margin:auto;text-align:center;
       background:linear-gradient(160deg,#020617,#0f172a);
@@ -124,43 +119,15 @@
 
     .info.show{transform:scale(1);opacity:1}
 
-    /* ===== FORM ===== */
-    form{
-      max-width:700px;margin:auto;
-      background:linear-gradient(160deg,#020617,#0b1220);
-      border:1px solid var(--borde);border-radius:32px;
-      padding:45px;box-shadow:0 45px 100px rgba(0,0,0,.8)
-    }
-
-    label{display:block;margin-top:22px;color:var(--primario);font-weight:600}
-
-    input,select{
-      width:100%;margin-top:10px;padding:15px;
-      border-radius:14px;border:1px solid var(--borde);
-      background:#020617;color:var(--texto);
-      transition:.3s
-    }
-
-    input:focus,select:focus{
-      outline:none;border-color:var(--primario);
-      box-shadow:0 0 0 3px rgba(56,189,248,.35)
-    }
-
-    input.ok{border-color:var(--ok)}
-    input.error{border-color:var(--error)}
-
-    button{
-      margin-top:35px;width:100%;padding:18px;
-      font-size:1.15rem;font-weight:700;border-radius:18px;
-      border:none;cursor:pointer;color:white;
-      background:linear-gradient(135deg,#0284c7,#38bdf8);
-      box-shadow:0 25px 50px rgba(56,189,248,.6);
-      transition:.35s
-    }
-
-    button:hover{
-      transform:translateY(-6px) scale(1.04);
-      box-shadow:0 40px 80px rgba(56,189,248,.8)
+    /* ===== IFRAME FORM ===== */
+    .form-wrapper{
+      max-width:900px;
+      margin:auto;
+      border-radius:32px;
+      overflow:hidden;
+      border:1px solid var(--borde);
+      box-shadow:0 45px 100px rgba(0,0,0,.85);
+      background:linear-gradient(160deg,#020617,#0f172a);
     }
 
     footer{
@@ -191,34 +158,34 @@
   <h2>¿De qué trata el club?</h2>
   <div class="grid">
     <div class="card"><img src="https://images.unsplash.com/photo-1581092919531-4c2b9c3f2f6a"><p>Aprender a analizar problemas reales y convertirlos en prototipos funcionales.</p></div>
-    <div class="card"><img src="https://images.unsplash.com/photo-1518770660439-4636190af475"><p>Uso de electrónica, sensores, actuadores y microcontroladores como Arduino.</p></div>
-    <div class="card"><img src="https://images.unsplash.com/photo-1581092334651-ddf26d9b1f68"><p>Trabajo colaborativo, pensamiento lógico y desarrollo de habilidades técnicas.</p></div>
+    <div class="card"><img src="https://images.unsplash.com/photo-1518770660439-4636190af475"><p>Uso de electrónica, sensores, actuadores y microcontroladores.</p></div>
+    <div class="card"><img src="https://images.unsplash.com/photo-1581092334651-ddf26d9b1f68"><p>Trabajo colaborativo y pensamiento lógico.</p></div>
   </div>
 </section>
 
 <section id="funciona">
   <h2>¿Cómo funciona?</h2>
   <div class="info">
-    <p><strong>Dirigido exclusivamente a alumnos del CETIS 107</strong></p>
+    <p><strong>Exclusivo para alumnos del CETIS 107</strong></p>
     <p>Sesiones presenciales los <strong>sábados</strong></p>
-    <p><em>Horarios pendientes de definir (editables)</em></p>
+    <p><em>Horarios pendientes de definir</em></p>
   </div>
 </section>
 
 <section id="registro">
   <h2>Registro al Club</h2>
-  <form id="form">
-    <label>Nombres</label><input required>
-    <label>Apellido paterno</label><input required>
-    <label>Apellido materno</label><input required>
-    <label>Grupo</label><input>
-    <label>Especialidad</label>
-    <select><option>Electrónica</option><option>Programación</option><option>Diseño</option><option>Ofimática</option><option>Construcción</option><option>Contabilidad</option><option>Aún no tengo</option></select>
-    <label>Correo electrónico</label><input type="email" placeholder="@cetis107.edu.mx" required>
-    <label>Número de teléfono</label><input type="tel" required>
-    <label>Edad</label><input type="number" min="10" max="99" required>
-    <button>Enviar registro</button>
-  </form>
+
+  <div class="form-wrapper">
+    <iframe 
+      src="https://docs.google.com/forms/d/e/1FAIpQLSdyzhaGmNg-XQF304GXaN6y3dVR3XwY0dG18JVRtK7L2xkIcw/viewform?embedded=true"
+      width="100%" 
+      height="1400" 
+      frameborder="0" 
+      marginheight="0" 
+      marginwidth="0">
+      Cargando…
+    </iframe>
+  </div>
 </section>
 
 <footer>Club de Prototipos · CETIS 107 · Uso escolar</footer>
@@ -229,13 +196,6 @@
   },{threshold:.2})
 
   document.querySelectorAll('.card,.info').forEach(el=>observer.observe(el))
-
-  document.getElementById('form').addEventListener('input',e=>{
-    if(e.target.tagName==='INPUT'){
-      e.target.classList.toggle('ok',e.target.checkValidity())
-      e.target.classList.toggle('error',!e.target.checkValidity())
-    }
-  })
 </script>
 
 </body>
